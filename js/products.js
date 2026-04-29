@@ -1,3 +1,6 @@
+// Global variable to store all products for filtering
+let allProducts = [];
+
 // Function to initiate the product loading process
 // This is the entry point that starts the data fetching sequence
 function requestProducts() {
@@ -17,6 +20,8 @@ function requestProducts() {
             return response.json();
         })
         .then(products => {
+            // Store products globally for filtering
+            allProducts = products;
             // The parsed JSON data (an array of product objects) is passed here
             // Call renderUI() to display the products in the HTML grid
             renderUI(products);
@@ -44,6 +49,12 @@ function renderUI(products) {
 
     // Clear any existing content in the container
     container.innerHTML = '';
+
+    // Check if no products to display
+    if (products.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center"><div class="alert alert-info">No products found matching your search.</div></div>';
+        return;
+    }
 
     // Iterate through each product in the array
     products.forEach((product, index) => {
@@ -105,6 +116,74 @@ function renderUI(products) {
     });
 }
 
+// Filter the global product array using search term and category
+function filterProducts(searchTerm, category) {
+    // Normalize the input for case-insensitive comparison
+    const normalizedSearch = String(searchTerm || '').trim().toLowerCase();
+    const normalizedCategory = String(category || 'All');
+
+    return allProducts.filter(product => {
+        // Compare product.name with the search term in lowercase
+        const nameMatch =
+            normalizedSearch === '' ||
+            product.name.toLowerCase().includes(normalizedSearch);
+
+        // If category is "All", accept every category; otherwise require exact match
+        const categoryMatch =
+            normalizedCategory === 'All' ||
+            product.category === normalizedCategory;
+
+        // Include the product only when both conditions are true
+        return nameMatch && categoryMatch;
+    });
+}
+
+// Function to handle search and filter products
+function handleSearch() {
+    // Get search input values (try navbar first, then main search)
+    const navbarSearch = document.getElementById('navbar-search');
+    const mainSearch = document.getElementById('product-search');
+    const searchTerm = (navbarSearch && navbarSearch.value) || (mainSearch && mainSearch.value) || '';
+
+    // Get category select value
+    const categorySelect = document.getElementById('category-select');
+    const category = categorySelect ? categorySelect.value : 'All';
+
+    // Filter products based on search term and category
+    const filteredProducts = filterProducts(searchTerm, category);
+
+    // Render the filtered products
+    renderUI(filteredProducts);
+}
+
 // Automatically start loading products when the DOM content is fully loaded
 // This ensures the HTML elements are available before trying to manipulate them
-document.addEventListener('DOMContentLoaded', requestProducts);
+document.addEventListener('DOMContentLoaded', function() {
+    // Load products initially
+    requestProducts();
+
+    // Add event listeners for search functionality
+    const navbarSearch = document.getElementById('navbar-search');
+    const mainSearch = document.getElementById('product-search');
+    const categorySelect = document.getElementById('category-select');
+
+    // Function to add search event listeners with debounce
+    function addSearchListener(inputElement) {
+        if (inputElement) {
+            let searchTimeout;
+            inputElement.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(handleSearch, 300); // 300ms debounce
+            });
+        }
+    }
+
+    // Add listeners to both search inputs
+    addSearchListener(navbarSearch);
+    addSearchListener(mainSearch);
+
+    if (categorySelect) {
+        // Trigger search on category change
+        categorySelect.addEventListener('change', handleSearch);
+    }
+});
