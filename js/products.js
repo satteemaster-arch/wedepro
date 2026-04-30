@@ -1,6 +1,98 @@
 // Global variable to store all products for filtering
 let allProducts = [];
 
+// Global cart object stored in localStorage
+const cart = loadCartFromStorage();
+
+function loadCartFromStorage() {
+    try {
+        return JSON.parse(localStorage.getItem('cart')) || {};
+    } catch (error) {
+        console.warn('Failed to load cart from localStorage:', error);
+        return {};
+    }
+}
+
+function saveCartToStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function getProductPrice(productId) {
+    const product = allProducts.find(p => String(p.id) === String(productId));
+    return product ? Number(product.price) : 0;
+}
+
+function loadCart() {
+    const storedCart = localStorage.getItem('cart');
+    if (!storedCart) {
+        return;
+    }
+
+    try {
+        const parsedCart = JSON.parse(storedCart);
+        if (parsedCart && typeof parsedCart === 'object') {
+            Object.assign(cart, parsedCart);
+            updateCartUI();
+        }
+    } catch (error) {
+        console.warn('Failed to parse cart from localStorage:', error);
+    }
+}
+
+function calculateCartTotal() {
+    return Object.entries(cart).reduce((total, [id, qty]) => {
+        return total + getProductPrice(id) * Number(qty);
+    }, 0);
+}
+
+function updateCartUI() {
+    const totalQuantity = Object.values(cart).reduce((sum, qty) => sum + Number(qty), 0);
+    const totalPrice = calculateCartTotal();
+
+    const countElement = document.getElementById('cart-count');
+    const totalElement = document.getElementById('cart-total');
+
+    if (countElement) {
+        countElement.textContent = totalQuantity;
+    }
+    if (totalElement) {
+        totalElement.textContent = `$${totalPrice.toFixed(2)}`;
+    }
+}
+
+function addProductToCart(productId) {
+    cart[productId] = (cart[productId] || 0) + 1;
+    saveCartToStorage();
+    updateCartUI();
+    console.log('Product added to cart:', productId, 'cart:', cart);
+}
+
+function updateCartCount() {
+    const totalQuantity = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+    const badge = document.getElementById('cart-count');
+    if (badge) {
+        badge.textContent = totalQuantity;
+    }
+}
+
+function handleCatalogClick(event) {
+    const catalog = document.getElementById('catalog');
+    const button = event.target.closest('.add-to-cart');
+    if (!button || !catalog || !catalog.contains(button)) {
+        return;
+    }
+
+    event.preventDefault();
+
+    const productId = button.dataset.id;
+    if (!productId) {
+        console.warn('Add to cart button clicked without data-id.');
+        return;
+    }
+
+    addProductToCart(productId);
+}
+
 // Function to initiate the product loading process
 // This is the entry point that starts the data fetching sequence
 function requestProducts() {
@@ -24,8 +116,7 @@ function requestProducts() {
             allProducts = products;
             // The parsed JSON data (an array of product objects) is passed here
             // Call renderUI() to display the products in the HTML grid
-            renderUI(products);
-        })
+            renderUI(products);            updateCartUI();        })
         .catch(error => {
             // Handle any errors that occurred during the fetch or JSON parsing
             console.error('Error loading products:', error);
@@ -89,7 +180,7 @@ function renderUI(products) {
                         </div>
                     </div>
                     <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
-                        <a href="${product.cartLink}" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
+                        <a href="${product.cartLink}" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4 add-to-cart" data-id="${product.id}">
                             <i class="fas fa-shopping-cart me-2"></i> Add To Cart
                         </a>
                         <div class="d-flex justify-content-between align-items-center">
@@ -159,8 +250,20 @@ function handleSearch() {
 // Automatically start loading products when the DOM content is fully loaded
 // This ensures the HTML elements are available before trying to manipulate them
 document.addEventListener('DOMContentLoaded', function() {
+    // Load cart data from localStorage first
+    loadCart();
+
     // Load products initially
     requestProducts();
+
+    // Attach event delegation listener to the catalog wrapper
+    const catalog = document.getElementById('catalog');
+    if (catalog) {
+        catalog.addEventListener('click', handleCatalogClick);
+    }
+
+    // Update the cart UI with current cart values
+    updateCartUI();
 
     // Add event listeners for search functionality
     const navbarSearch = document.getElementById('navbar-search');
