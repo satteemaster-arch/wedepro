@@ -1,0 +1,26 @@
+{
+  "name": "electro-bootstrap-1.0.0",
+  "version": "1.0.0",
+  "description": "- [Demo](https://themewagon.github.io/Electro-Bootstrap/)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satteemaster-arch/wedepro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/satteemaster-arch/wedepro/issues"
+  },
+  "homepage": "https://github.com/satteemaster-arch/wedepro#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
