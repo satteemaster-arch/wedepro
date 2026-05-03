@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <style>
+    .title { font: bold 32px Arial, sans-serif; fill: #1a1a1a; }
+    .header { font: bold 18px Arial, sans-serif; fill: #ffffff; }
+    .cell { font: 16px Arial, sans-serif; fill: #1a1a1a; }
+    .row-even { fill: #f7f7f7; }
+    .row-odd { fill: #ffffff; }
+    .heading-bg { fill: #3d5afe; }
+    .border { fill: none; stroke: #888888; stroke-width: 1; }
+  </style>
+  <rect x="0" y="0" width="1400" height="900" fill="#ffffff"/>
+  <text x="40" y="55" class="title">Product Filter Contract Table</text>
+  <g transform="translate(40, 100)">
+    <rect x="0" y="0" width="1320" height="60" class="heading-bg"/>
+    <text x="10" y="38" class="header">Requirement</text>
+    <text x="280" y="38" class="header">Input</text>
+    <text x="620" y="38" class="header">Expected Output</text>
+    <text x="960" y="38" class="header">Validation</text>
+    <text x="1210" y="38" class="header">Error Handling</text>
+    <g class="border">
+      <rect x="0" y="0" width="1320" height="540"/>
+      <line x1="280" y1="0" x2="280" y2="540"/>
+      <line x1="620" y1="0" x2="620" y2="540"/>
+      <line x1="960" y1="0" x2="960" y2="540"/>
+      <line x1="1210" y1="0" x2="1210" y2="540"/>
+      <line x1="0" y1="90" x2="1320" y2="90"/>
+      <line x1="0" y1="180" x2="1320" y2="180"/>
+      <line x1="0" y1="270" x2="1320" y2="270"/>
+      <line x1="0" y1="360" x2="1320" y2="360"/>
+      <line x1="0" y1="450" x2="1320" y2="450"/>
+    </g>
+    <rect x="0" y="90" width="1320" height="90" class="row-even"/>
+    <rect x="0" y="180" width="1320" height="90" class="row-odd"/>
+    <rect x="0" y="270" width="1320" height="90" class="row-even"/>
+    <rect x="0" y="360" width="1320" height="90" class="row-odd"/>
+    <rect x="0" y="450" width="1320" height="90" class="row-even"/>
+    <text x="10" y="125" class="cell">Search and Category Filter</text>
+    <text x="290" y="125" class="cell">Search term; selected category</text>
+    <text x="630" y="125" class="cell">Filtered product list rendered on shop page</text>
+    <text x="970" y="125" class="cell">Case-insensitive match; category exact or All</text>
+    <text x="1220" y="125" class="cell">Show info message when no products match</text>
+    <text x="10" y="215" class="cell">Product Data Loading</text>
+    <text x="290" y="215" class="cell">Fetch data/products.json on page load</text>
+    <text x="630" y="215" class="cell">allProducts set and UI rendered</text>
+    <text x="970" y="215" class="cell">HTTP response ok; JSON parse success</text>
+    <text x="1220" y="215" class="cell">Display failure alert in product container</text>
+    <text x="10" y="305" class="cell">Cart Add-to-Cart Support</text>
+    <text x="290" y="305" class="cell">Button click with data-id</text>
+    <text x="630" y="305" class="cell">Quantity updated in localStorage and UI</text>
+    <text x="970" y="305" class="cell">productId exists in allProducts</text>
+    <text x="1220" y="305" class="cell">Log warning for invalid clicks</text>
+    <text x="10" y="395" class="cell">Search Preservation</text>
+    <text x="290" y="395" class="cell">Current search and category values</text>
+    <text x="630" y="395" class="cell">UI retains filtered product results</text>
+    <text x="970" y="395" class="cell">Input values stable if unchanged</text>
+    <text x="1220" y="395" class="cell">No-op if filter controls unavailable</text>
+    <text x="10" y="485" class="cell">No Results Handling</text>
+    <text x="290" y="485" class="cell">Any matching filter combination</text>
+    <text x="630" y="485" class="cell">Show empty state message</text>
+    <text x="970" y="485" class="cell">Search and category terms normalized</text>
+    <text x="1220" y="485" class="cell">Preserve user input; avoid errors</text>
+  </g>
+</svg>

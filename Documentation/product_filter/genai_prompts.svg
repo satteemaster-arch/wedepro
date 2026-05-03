@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="780" viewBox="0 0 1000 780">
+  <style>
+    .title { font: bold 28px Arial, sans-serif; fill: #1a1a1a; }
+    .body { font: 16px Arial, sans-serif; fill: #1a1a1a; }
+    .prompt { font: 14px Arial, sans-serif; fill: #333333; }
+    .label { font: bold 14px Arial, sans-serif; fill: #1a1a1a; }
+  </style>
+  <rect width="1000" height="780" fill="#ffffff"/>
+  <text x="40" y="55" class="title">GenAI Prompts for Product Filter</text>
+  <text x="40" y="110" class="label">Prompt 1:</text>
+  <text x="40" y="135" class="prompt">Generate JavaScript to load products from data/products.json, filter by search term and selected category, and render an accessible Bootstrap shop grid with immediate updates.</text>
+  <text x="40" y="200" class="label">Prompt 2:</text>
+  <text x="40" y="225" class="prompt">Explain the contract for a static shop page product filter: input fields, expected output, validation rules, and error cases.</text>
+  <text x="40" y="290" class="label">Prompt 3:</text>
+  <text x="40" y="315" class="prompt">Describe the sequence diagram for user interaction through the filter widget, the client-side filter module, and the product data source.</text>
+  <text x="40" y="380" class="label">Prompt 4:</text>
+  <text x="40" y="405" class="prompt">Suggest a minimal GenAI prompt to implement category-based and search-based product filtering in the existing shop.html page.</text>
+  <text x="40" y="470" class="label">Prompt 5:</text>
+  <text x="40" y="495" class="prompt">Provide a compact implementation plan for adding an empty-state message, cart update support, and safe fallback if product data fails to load.</text>
+</svg>

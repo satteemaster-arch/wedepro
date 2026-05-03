@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <style>
+    .title { font: bold 28px Arial, sans-serif; fill: #1a1a1a; }
+    .actor { font: bold 16px Arial, sans-serif; fill: #ffffff; }
+    .label { font: 14px Arial, sans-serif; fill: #1a1a1a; }
+    .box { fill: #1976d2; stroke: #0d47a1; stroke-width: 2; }
+    .line { stroke: #444444; stroke-width: 2; }
+    .dash { stroke-dasharray: 6 6; stroke: #888888; }
+  </style>
+  <rect width="1200" height="700" fill="#ffffff"/>
+  <text x="40" y="50" class="title">Product Filter Sequence Diagram</text>
+  <g>
+    <rect x="80" y="100" width="160" height="40" class="box"/>
+    <text x="130" y="125" class="actor">User</text>
+    <rect x="340" y="100" width="160" height="40" class="box"/>
+    <text x="375" y="125" class="actor">Shop UI</text>
+    <rect x="670" y="100" width="180" height="40" class="box"/>
+    <text x="700" y="125" class="actor">Filter Module</text>
+    <rect x="980" y="100" width="160" height="40" class="box"/>
+    <text x="1010" y="125" class="actor">Product Data</text>
+    <line x1="160" y1="140" x2="160" y2="620" class="dash"/>
+    <line x1="420" y1="140" x2="420" y2="620" class="dash"/>
+    <line x1="760" y1="140" x2="760" y2="620" class="dash"/>
+    <line x1="1060" y1="140" x2="1060" y2="620" class="dash"/>
+  </g>
+  <g>
+    <line x1="160" y1="180" x2="420" y2="180" class="line" marker-end="url(#arrow)"/>
+    <text x="220" y="170" class="label">Click filter/search</text>
+    <line x1="420" y1="240" x2="760" y2="240" class="line" marker-end="url(#arrow)"/>
+    <text x="510" y="230" class="label">Trigger handleSearch()</text>
+    <line x1="760" y1="300" x2="1060" y2="300" class="line" marker-end="url(#arrow)"/>
+    <text x="795" y="290" class="label">filterProducts(search, category)</text>
+    <line x1="1060" y1="360" x2="760" y2="360" class="line" marker-end="url(#arrow-left)"/>
+    <text x="795" y="350" class="label">Return filtered array</text>
+    <line x1="760" y1="420" x2="420" y2="420" class="line" marker-end="url(#arrow-left)"/>
+    <text x="520" y="410" class="label">Render filtered products</text>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#444444"/>
+    </marker>
+    <marker id="arrow-left" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto">
+      <path d="M10,0 L0,5 L10,10 z" fill="#444444"/>
+    </marker>
+  </defs>
+</svg>
