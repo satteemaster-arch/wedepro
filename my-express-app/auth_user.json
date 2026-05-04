@@ -1,0 +1,16 @@
+[
+  {
+    "id": "user_1",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "$2b$10$kFQyzgdbVguEQpIcn39HAOs8Vsb1El5GgRUDkCeflQ2JbZgCgJ6u.",
+    "registeredAt": "2026-05-04T03:54:12.673Z"
+  },
+  {
+    "id": "user_2",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "password": "$2b$10$S2WE.BIJFBVQJ/I5cdL5yOhbAZotw6yCejECHO5zSq2qEKKW/fXrS",
+    "registeredAt": "2026-05-04T03:54:58.624Z"
+  }
+]
