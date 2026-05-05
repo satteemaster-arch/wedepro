@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
+const checkoutRoutes = require('./routes/checkoutRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -13,6 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount authentication routes at /api
 app.use('/api', authRoutes);
+app.use('/api', checkoutRoutes);
 
 // Serve the main HTML file for the root route
 app.get('/', (req, res) => {
